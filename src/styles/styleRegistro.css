@@ -1,84 +1,119 @@
-/* Fondo de la página */
+/* Reutilizamos la base limpia del Login */
+
 .registro-page {
-  width: 100%;
-  height: 100vh;
   display: flex;
- 
- 
-
-  background-image: url("../assets/registerIMG/imagenRegistro.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-light);
+  padding: 100px 20px 40px 20px; /* Más padding arriba por el Navbar */
 }
 
-/* Contenedor del formulario */
 .registro-container {
-  background-color: rgba(23, 22, 22, 0.85); /* Fondo semitransparente */
-  padding: 30px 40px;
-  border-radius: 10px;
-  width: 400px; /* Tamaño fijo del formulario */
- 
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-  margin-left: 500px;
-  
-}
-
-/* Etiquetas y campos */
-form label {
-  color: white;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-form input,
-form select {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 5px;
-  box-sizing: border-box;
+  max-width: 500px; /* Un poco más ancho que el login */
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.5s ease-out;
 }
 
-/* Botones */
-button {
-  padding: 10px 25px;
-  background-color: #5cb85c;
+#myForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espacio uniforme entre campos */
+}
+
+#myForm label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  display: block;
+}
+
+#myForm input, 
+#myForm select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: inherit;
+}
+
+#myForm input:focus,
+#myForm select:focus {
+  border-color: var(--primary-color);
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+}
+
+/* Botón de Registro */
+#myForm button[type="submit"] {
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 30px;
   cursor: pointer;
-  margin: 5px auto;
-  display: block;
-  transition: background 0.2s;
+  margin-top: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #4cae4c;
+#myForm button[type="submit"]:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
 }
 
-/* Botones de enlace dentro del formulario */
-form button[type="button"] {
-  background-color: #007bff;
-}
-
-form button[type="button"]:hover {
-  background-color: #0069d9;
-}
-
-/* Texto debajo de botones */
+/* Botones Secundarios (Volver, Iniciar Sesión) */
 .cuenta-label {
   text-align: center;
-  color: white;
   display: block;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #888;
 }
 
-/* Mensajes de error */
+/* Estilizamos los botones que son links para que se vean sutiles */
+#myForm a button {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  font-weight: 600;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+#myForm a button:hover {
+  background-color: #f0f0f0;
+  color: black;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mensajes de Error en línea */
 .error {
-  color: red;
-  font-size: 0.9em;
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: -10px; /* Pegarlo un poco al input */
+  margin-bottom: 5px;
   display: block;
-  margin-bottom: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

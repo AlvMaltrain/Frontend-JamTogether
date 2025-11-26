@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import BuscarBandas from "./pages/BuscarBandas";
 import BuscarArtistas from "./pages/BuscarArtistas";
-import Login from "./pages/Login";
-import Registro from "./pages/Registro";
+import LoginModal from "./components/LoginModal";
+import RegisterModal from "./components/RegisterModal";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/buscar-bandas" element={<BuscarBandas/>} />
         <Route path="/buscar-artistas" element={<BuscarArtistas />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/registro" element={<Registro/>} />
+        <Route path="/login" element={<LoginModal/>} />
+        <Route path="/registro" element={<RegisterModal/>} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,88 +1,122 @@
-/* Fondo solo para login */
+/* Contenedor Principal (Fondo) */
 .login-page {
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../assets/loginIMG/imagenLogin.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  min-height: 100vh;
+  background-color: var(--bg-light); /* Gris muy suave */
+  padding-top: 60px; /* Espacio para el Navbar fijo */
 }
 
-/* Contenedor del formulario */
+/* Tarjeta del Formulario */
 .login-container {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 30px 40px;
-  border-radius: 10px;
-  width: 400px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Sombra elegante */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Título */
+.login-container h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* Formulario */
+#loginForm {
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+  gap: 20px;
+  text-align: left;
 }
 
-/* Etiquetas y campos */
-form label {
-  color: white;
-  display: block;
+/* Labels e Inputs */
+#loginForm label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
   margin-bottom: 5px;
+  display: block;
 }
 
-form input {
+#loginForm input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 5px;
-  box-sizing: border-box;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
-/* Botones */
-button {
-  padding: 10px 25px;
-  background-color: #5cb85c;
+#loginForm input:focus {
+  border-color: var(--primary-color); /* Naranja al enfocar */
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+}
+
+/* Botón Principal */
+#loginForm button[type="submit"] {
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 30px; /* Redondeado estilo píldora */
   cursor: pointer;
-  margin: 5px auto;
-  display: block;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background-color: #4cae4c;
-}
-
-/* Botones de enlace */
-.link-btn {
-  text-decoration: none;
-  color: white;
-  background-color: #0069d9;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-align: center;
-  display: block;
-  margin: 10px auto;
-}
-
-.link-btn:hover {
-  background-color: #0069d9;
-}
-
-/* Texto debajo de botones */
-.register-label {
-  text-align: center;
-  color: white;
-  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
   margin-top: 10px;
 }
 
-/* Mensajes de error */
-.error {
-  color: red;
-  font-size: 0.9em;
+#loginForm button[type="submit"]:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+}
+
+/* Enlaces y Textos Extra */
+.register-label {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 15px;
   display: block;
-  margin-bottom: 8px;
+}
+
+.link-btn {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Mensajes de Error */
+.error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

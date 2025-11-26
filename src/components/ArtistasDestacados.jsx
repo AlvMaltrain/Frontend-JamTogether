@@ -2,99 +2,83 @@ import React, { useState } from "react";
 import "../styles/artistasDestacados.css";
 
 export default function ArtistasDestacados({
-  artistas = [], //prop
-  titulo = "Artistas Destacados", //prop
-  layout = "vertical", //prop 
-  placeholderImage // imagen por defecto si algún artista no trae image //prop
+  artistas = [], 
+  titulo = "Artistas Destacados", 
+  layout = "vertical", 
 }) {
   const [artistaSeleccionado, setArtistaSeleccionado] = useState(null);
 
-  return (
-    <section className="bandas-destacadas">
-      <h2 className="tituloArtistas">{titulo}</h2>
+  const mostrarInstrumentos = (instrumentsArray) => {
+      if (!instrumentsArray || instrumentsArray.length === 0) return "Músico";
+      return instrumentsArray[0].nombreInstrumento + (instrumentsArray.length > 1 ? "..." : "");
+  };
 
-      {/* Cards */}
+  const obtenerImagen = (artista) => {
+    if (artista.imageUrl && artista.imageUrl.trim() !== "") {
+        return artista.imageUrl;
+    }
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(artista.nombrePublico)}&background=random&color=fff&size=200&bold=true`;
+  };
+
+  return (
+    <section className="artistas-destacados">
+      {/* Solo mostramos el título si no está vacío */}
+      
+
       <div className={`cards-container ${layout}`}>
         {artistas.map((artista) => (
-          <div className={`card ${layout}`} key={artista.id}>
-            {/* Muestra imagen solo si existe, o usa placeholder si se pasa por props */}
-            {(artista.image || placeholderImage) && (
-              <img
-                src={artista.image || placeholderImage}
-                alt={artista.nombre}
+          <div className={`card ${layout}`} key={artista.id} onClick={() => setArtistaSeleccionado(artista)}>
+            
+            <img
+                src={obtenerImagen(artista)}
+                alt={artista.nombrePublico}
                 className="card-img"
-              />
-            )}
+                onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(artista.nombrePublico)}&background=random`;
+                }}
+            />
 
-            {layout === "horizontal" ? (
-              <div className="card-content">
-                <h3 className="nombreBanda">
-                  {artista.nombre} / {artista.ciudad}
-                </h3>
-
-                <h4 className="estiloBanda">{artista.instrumento}</h4>
-                <p className="descripcionBanda">{artista.descripcion}</p>
-
-                <button onClick={() => setArtistaSeleccionado(artista)}>
-                  Ver más
-                </button>
-              </div>
+            {layout === "vertical" ? (
+                // --- HOME (Compacto) ---
+                <div className="card-info-minimal">
+                    <h3 className="nombreBanda">{artista.nombrePublico}</h3>
+                    <h4 className="estiloBanda">{mostrarInstrumentos(artista.instruments)}</h4>
+                    <p className="ciudad-mini">{artista.ubicacion}</p>
+                </div>
             ) : (
-              <>
-                <h3 className="nombreBanda">{artista.nombre}</h3>
-                <h4 className="estiloBanda">{artista.instrumento}</h4>
-                <p className="descripcionBanda">{artista.descripcion}</p>
-                <button onClick={() => setArtistaSeleccionado(artista)}>
-                  Ver más
-                </button>
-              </>
+                // --- BÚSQUEDA (Completo con Descripción y Pin) ---
+                <div className="card-content">
+                    <h3 className="nombreBanda">{artista.nombrePublico}</h3>
+                    <h4 className="estiloBanda">{mostrarInstrumentos(artista.instruments)}</h4>
+                    
+                    {/* Ubicación con Icono */}
+                    <p className="ciudad-mini">📍 {artista.ubicacion}</p>
+                    
+                    {/* Descripción (Bio) */}
+                    <p className="descripcion-busqueda">
+                        {artista.bio || "Sin biografía disponible."}
+                    </p>
+                </div>
             )}
           </div>
         ))}
       </div>
 
-      {/* ==============================
-          Ventana Emergente
-         ============================== */}
+      {/* MODAL */}
       {artistaSeleccionado && (
-        <div
-          className="modal-overlay"
-          onClick={() => setArtistaSeleccionado(null)}
-        >
+        <div className="modal-overlay" onClick={() => setArtistaSeleccionado(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="close-btn"
-              onClick={() => setArtistaSeleccionado(null)}
-            >
-              ✖
-            </button>
-
-            {(artistaSeleccionado.image || placeholderImage) && (
-              <img
-                src={artistaSeleccionado.image || placeholderImage}
-                alt={artistaSeleccionado.nombre}
-                className="modal-img"
-              />
-            )}
-
-            <h2 className="tituloBanda-card">{artistaSeleccionado.nombre}</h2>
-            <h4 className="estiloCiudad-card">
-              {artistaSeleccionado.instrumento} / {artistaSeleccionado.ciudad}
-            </h4>
-            <p className="descripcionBanda-card">
-              {artistaSeleccionado.descripcion}
-            </p>
-
-            {/* Info extra opcional */}
+            <button className="close-btn" onClick={() => setArtistaSeleccionado(null)}>✖</button>
+            <img src={obtenerImagen(artistaSeleccionado)} alt="" className="modal-img" />
+            <h2 className="tituloBanda-card">{artistaSeleccionado.nombrePublico}</h2>
+            
             <div className="modal-extra">
-              <p>
-                <strong>Instrumento:</strong> {artistaSeleccionado.instrumento}
-              </p>
-              <p>
-                <strong>Ciudad:</strong> {artistaSeleccionado.ciudad}
-              </p>
+              <p><strong>Instrumentos:</strong> {artistaSeleccionado.instruments?.map(i => i.nombreInstrumento).join(", ")}</p>
+              <p><strong>Ubicación:</strong> {artistaSeleccionado.ubicacion}</p>
+              <p><strong>Biografía:</strong></p>
+              <p className="descripcionBanda-card">{artistaSeleccionado.bio || "Sin biografía."}</p>
             </div>
-
             <button className="contact-btn">Contactar Artista</button>
           </div>
         </div>
@@ -102,4 +86,3 @@ export default function ArtistasDestacados({
     </section>
   );
 }
-

@@ -1,46 +1,70 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SidebarBuscarBandas from "../components/SidebarBuscarBandas";
 import BandasDestacadas from "../components/BandasDestacadas";
-import { Bandas, buscarBandas } from "../data/data";
+import api from "../api/axiosConfig"; // Importamos la API
 import "../styles/buscarBandas.css";
-import React from "react";
-
 
 export default function BuscarBandas() {
-  //  Estado de filtros (valores escritos por el usuario)
+  // Estado de filtros (inputs del usuario)
   const [filtros, setFiltros] = useState({ ciudad: "", estilo: "" });
 
-  //  Estado de las bandas filtradas (resultado del filtro)
-  const [bandasFiltradas, setBandasFiltradas] = useState([]);
+  // Estados para manejo de datos
+  const [todasLasBandas, setTodasLasBandas] = useState([]); // Lista completa del backend
+  const [bandasFiltradas, setBandasFiltradas] = useState([]); // Lista filtrada para mostrar
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-    // Mostrar todas las bandas al cargar por primera vez
+  // 1. Cargar bandas desde el Backend al iniciar
   useEffect(() => {
-    setBandasFiltradas(buscarBandas);
+    const fetchBandas = async () => {
+      try {
+        // Llamada al endpoint GET /api/bands
+        const response = await api.get('/api/bands');
+        
+        setTodasLasBandas(response.data);
+        setBandasFiltradas(response.data); // Inicialmente se muestran todas
+      } catch (err) {
+        console.error("Error al cargar bandas:", err);
+        setError("Hubo un problema al cargar la lista de bandas.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBandas();
   }, []);
 
-  // Función que se ejecuta al presionar el botón "Filtrar"
+  // 2. Función de Filtrado adaptada al Backend
   const aplicarFiltro = () => {
-    const filtradas = buscarBandas.filter((banda) => {
+    const norm = (s) => s?.toString().trim().toLowerCase() || "";
+
+    const filtradas = todasLasBandas.filter((banda) => {
+      
+      // Filtro por Ciudad (Backend: ubicacion)
       const ciudadMatch =
-        !filtros.ciudad ||
-        banda.ciudad.toLowerCase().includes(filtros.ciudad.trim().toLowerCase());
+        !filtros.ciudad || norm(banda.ubicacion).includes(norm(filtros.ciudad));
+
+      // Filtro por Estilo/Género (Backend: genres es un ARRAY de objetos)
+      // Verificamos si al menos uno de los géneros de la banda coincide
       const estiloMatch =
         !filtros.estilo ||
-        banda.estilo.toLowerCase().includes(filtros.estilo.trim().toLowerCase());
+        (banda.genres && banda.genres.some(genero => 
+            norm(genero.nombreGenero).includes(norm(filtros.estilo))
+        ));
 
       return ciudadMatch && estiloMatch;
     });
 
-    //  Guardamos el resultado filtrado
+    // Guardamos el resultado filtrado
     setBandasFiltradas(filtradas);
   };
 
   return (
     <div className="app-container">
       <Navbar />
-      <h1>Buscar Artistas</h1>
+      <h1 style={{textAlign: "center", margin: "20px 0"}}>Buscar Bandas</h1>
 
       {/* Sidebar con filtros */}
       <SidebarBuscarBandas
@@ -49,16 +73,31 @@ export default function BuscarBandas() {
         aplicarFiltro={aplicarFiltro}
       />
 
-      {/*  Mostrar resultados */}
-      {bandasFiltradas.length > 0 ? (
-        <BandasDestacadas
-          bandas={bandasFiltradas}
-          titulo="Bandas Encontradas"
-          layout="horizontal"
-        />
-      ) : (      
-          <p>No se han aplicado filtros o no hay resultados</p>   
-      )}
+      <div className="main-content-search">
+          {/* Mensajes de Estado */}
+          {loading && <p style={{textAlign: 'center', marginTop: '50px'}}>Cargando bandas...</p>}
+          
+          {error && (
+            <div style={{textAlign: 'center', marginTop: '50px', color: '#666'}}>
+                <p>{error}</p>
+            </div>
+          )}
+
+          {/* Mostrar resultados */}
+          {!loading && !error && (
+             bandasFiltradas.length > 0 ? (
+                <BandasDestacadas
+                  bandas={bandasFiltradas}
+                  layout="horizontal"
+                  placeholderImage="https://via.placeholder.com/300x200?text=Banda"
+                />
+              ) : (
+                  <p style={{textAlign: 'center', marginTop: '50px'}}>
+                      No se encontraron bandas con esos criterios.
+                  </p>
+              )
+          )}
+      </div>
 
       <Footer />
     </div>

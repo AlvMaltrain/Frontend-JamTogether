@@ -1,100 +1,138 @@
-/* ==== Barra de filtros para Explorar Artistas (usa tu markup actual) ==== */
+/* ==========================
+   Barra de filtros (SidebarBuscarArtistas)
+   ========================== */
 .sidebar-filtros {
   display: flex;
-  flex-wrap: wrap;             /* permite que los labels salten de linea si falta espacio */
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;     /* centrado como en Buscar Bandas */
-  gap: 24px 50px;              /* espacio entre campos (filas x columnas) */
+  justify-content: center;
+  gap: 20px 40px; 
   width: 100%;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 40px;
 
   padding: 30px 40px;
-  background-color: #262525;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  color: #fff;
+  background-color: white; 
+  border: 1px solid var(--border-color); 
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+  color: var(--text-main);
+
+  margin-top: 60px;
 }
 
-/* Título (si lo quieres arriba en toda la fila) */
+/* Título del filtro */
 .sidebar-filtros h3 {
   width: 100%;
-  margin: 0 0 6px 0;
-  font-size: 18px;
-  font-weight: 600;
-  border-bottom: 2px solid #e38e04;
-  padding-bottom: 6px;
+  margin: 0 0 15px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--primary-color); 
+  padding-bottom: 10px;
+  text-align: left;
 }
 
-/* Cada campo: texto + input en línea */
+/* Contenedor de cada campo (Label + Input) */
 .sidebar-filtros label {
   display: flex;
   align-items: center;
-  gap: 8px;            /* separación entre el texto del label y el input */
-  margin: 0;           /* sin márgenes extra */
-  font-size: 14px;
-  color: #fff;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
-/* Inputs con estilo oscuro */
+/* Inputs  */
 .sidebar-filtros input[type="text"] {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;       
+  padding: 10px 15px;
+  border-radius: 25px; 
+  border: 1px solid var(--border-color);
   outline: none;
-  font-size: 14px;
-  background: #111;
-  color: #fff;
-  min-width: 190px;    
+  font-size: 0.9rem;
+  background-color: var(--bg-light); 
+  color: var(--text-main);
+  min-width: 200px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.sidebar-filtros input[type="text"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1); 
+  background-color: white;
 }
 
 .sidebar-filtros input::placeholder {
-  color: #9a9a9a;
+  color: #aaa;
 }
 
-/* Acciones (Filtrar / Limpiar) */
+/* Acciones (Botones Filtrar / Limpiar) */
 .sidebar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
+  margin-top: 10px; 
 }
 
+/* Botón Principal (Filtrar) */
 .sidebar-actions button {
-  padding: 8px 16px;
-  background-color: #e38e04;
+  padding: 10px 25px;
+  background-color: var(--text-main); 
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .sidebar-actions button:hover {
-  background-color: #ff9f00;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  background-color: var(--primary-color); 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
 }
 
-/* Botón “Limpiar” en tono neutro */
+/* Botón Secundario (Limpiar) */
 .sidebar-actions button[type="button"] {
-  background-color: #2a2a2a;
-  border: 1px solid #3a3a3a;
-}
-.sidebar-actions button[type="button"]:hover {
-  background-color: #333;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: var(--text-secondary);
 }
 
-/* Responsive: apila en pantallas pequeñas */
+.sidebar-actions button[type="button"]:hover {
+  background-color: #f0f0f0;
+  color: var(--text-main);
+  border-color: #bbb;
+  transform: translateY(0); 
+  box-shadow: none;
+}
+
+/* Responsive */
 @media (max-width: 900px) {
   .sidebar-filtros {
-    justify-content: flex-start;
-    gap: 16px 20px;
-    padding: 20px;
+    flex-direction: column;
+    align-items: stretch; /* Ocupar todo el ancho */
+    gap: 20px;
+    padding: 25px;
   }
+
   .sidebar-filtros label {
-    width: 100%;       /* cada campo toma una fila en mobile */
+    flex-direction: column; 
+    align-items: flex-start;
+    width: 100%;
   }
+
+  .sidebar-filtros input[type="text"] {
+    width: 100%; /* Input full width */
+  }
+
   .sidebar-actions {
     width: 100%;
-    justify-content: flex-start;
+    justify-content: space-between; /* Botones separados */
+  }
+  
+  .sidebar-actions button {
+      flex: 1; /* Botones del mismo tamaño */
   }
 }

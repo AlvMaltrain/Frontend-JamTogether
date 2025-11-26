@@ -14,7 +14,6 @@ export default function SidebarBuscarArtistas({ filtros, setFiltros, aplicarFilt
 
   return (
     <aside className="sidebar-filtros">
-      <h3>Filtrar Artistas</h3>
 
       <label>
         Nombre
@@ -51,7 +50,6 @@ export default function SidebarBuscarArtistas({ filtros, setFiltros, aplicarFilt
 
       <div className="sidebar-actions">
         <button onClick={aplicarFiltro}>Filtrar</button>
-        <button type="button" onClick={limpiar}>Limpiar</button>
       </div>
     </aside>
   );
