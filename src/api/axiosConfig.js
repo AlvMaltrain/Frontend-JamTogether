@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // IP DE EC2 (Cambiar si se reinicia la instancia)
-const BASE_URL = 'http://100.27.49.61:8080'; 
+const BASE_URL = 'http://44.211.239.75:8080'; 
 
 const api = axios.create({
     baseURL: BASE_URL,
