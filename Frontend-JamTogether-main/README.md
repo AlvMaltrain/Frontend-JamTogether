@@ -107,4 +107,4 @@ npm run build
 
 Esto genera una carpeta dist con los archivos optimizados.
 
-El contenido de dist se sube a un Bucket S3 de AWS configurado para alojamiento web estático.
+El contenido de dist se sube a un Bucket S3 de AWS configurado para alojamiento web.
