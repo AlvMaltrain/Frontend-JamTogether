@@ -1,0 +1,123 @@
+/* ==========================
+   Footer 
+   ========================== */
+.footer {
+  background-color: white;
+  border-top: 1px solid var(--border-color);
+  padding: 60px 0 20px 0;
+  width: 100%;
+  margin-top: auto; 
+  color: var(--text-main);
+}
+
+.containerFooter {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-links {
+  flex: 1;
+  min-width: 200px;
+  padding: 0 15px;
+}
+
+/* Títulos de columnas */
+.footer-links h4 {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 25px;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left; 
+}
+
+/* Línea de acento naranja */
+.footer-links h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+  display: block;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.footer-links ul li a:hover {
+  color: var(--primary-color);
+  padding-left: 8px; 
+}
+
+/* --- ICONOS DE REDES SOCIALES --- */
+.social-links {
+    display: flex;
+    gap: 25px;
+}
+
+.social-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-light); 
+  border-radius: 50%; 
+  color: var(--text-main); /* Icono negro por defecto */
+  transition: all 0.3s ease;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+/* Estilo del SVG dentro del enlace */
+.social-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor; /* Toma el color del texto */
+}
+
+.social-link:hover {
+  background-color: var(--primary-color); 
+  color: white; 
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-row {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-links h4 { text-align: center; }
+    .footer-links h4::after { left: 50%; transform: translateX(-50%); }
+    .footer-links ul li a { text-align: center; }
+    .social-links { justify-content: center; }
+}

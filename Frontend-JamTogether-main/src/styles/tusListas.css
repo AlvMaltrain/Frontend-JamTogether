@@ -1,0 +1,139 @@
+/* Sección General */
+.tus-listas-section {
+  padding: 60px 20px;
+  background-color: #ffffff; /* Fondo blanco para contrastar con las secciones grises */
+  border-top: 1px solid var(--border-color);
+}
+
+.container-listas {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cabecera: Título a la izquierda, "Ver todas" a la derecha */
+.header-listas {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 15px;
+}
+
+.titulo-seccion {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.ver-todas {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ver-todas:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Grilla: 5 Columnas  */
+.grid-listas {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;
+}
+
+/* Tarjeta Individual */
+.card-lista {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card-lista:hover .titulo-lista {
+  color: var(--primary-color);
+}
+
+/* Imagen y Efecto Hover */
+.img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; 
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+/* Zoom al pasar el mouse */
+.card-lista:hover .img-wrapper img {
+  transform: scale(1.08);
+}
+
+/* Overlay de Play (aparece al hover) */
+.play-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.play-overlay span {
+  color: white;
+  font-size: 2rem;
+  background: rgba(255, 87, 34, 0.9); /* Naranja */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 4px; /* Ajuste óptico del triángulo */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.card-lista:hover .play-overlay {
+  opacity: 1;
+}
+
+/* Textos */
+.titulo-lista {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+
+.subtitulo-lista {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .grid-listas { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-listas { grid-template-columns: repeat(2, 1fr); }
+}

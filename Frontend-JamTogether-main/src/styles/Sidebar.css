@@ -1,0 +1,138 @@
+/* ==========================
+   Layout General
+   ========================== */
+.buscar-bandas-page {
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: var(--bg-color);
+  min-height: 60vh;
+}
+
+/* ==========================
+   Barra de Filtros (Sidebar)
+   ========================== */
+.sidebar-buscar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px 40px;
+  width: 100%;
+  max-width: 1200px; 
+  margin: 0 auto 40px auto; 
+
+  padding: 30px 40px;
+  
+ 
+  background-color: white;
+  border-radius: 12px;
+  color: var(--text-main);
+}
+
+/* Lista de filtros */
+.sidebar-buscar .filtros-lista {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  
+}
+
+.sidebar-buscar .filtros-lista li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary); 
+}
+
+/* Inputs  */
+.sidebar-buscar input {
+  padding: 10px 15px;
+  border-radius: 25px; 
+  border: 1px solid var(--border-color);
+  outline: none;
+  font-size: 0.9rem;
+  
+ 
+  background-color: var(--bg-light); 
+  color: var(--text-main);
+  min-width: 220px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-buscar input::placeholder {
+  color: #aaa;
+}
+
+.sidebar-buscar input:focus {
+  background-color: white;
+  border-color: var(--primary-color); 
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+}
+
+.sidebar-buscar .genero {
+  margin-left: 0; 
+}
+
+/* Botones */
+.sidebar-buscar button {
+  padding: 10px 25px;
+  background-color: var(--text-main); 
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-buscar button:hover {
+  background-color: var(--primary-color); 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .buscar-bandas-page {
+    padding: 20px;
+  }
+
+  .sidebar-buscar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    padding: 25px;
+  }
+
+  .sidebar-buscar .filtros-lista {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sidebar-buscar .filtros-lista li {
+    width: 100%;
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+
+  .sidebar-buscar input {
+    width: 100%; 
+  }
+  
+  .sidebar-buscar button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

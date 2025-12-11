@@ -1,0 +1,122 @@
+/* Contenedor Principal (Fondo) */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-light); /* Gris muy suave */
+  padding-top: 60px; /* Espacio para el Navbar fijo */
+}
+
+/* Tarjeta del Formulario */
+.login-container {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Sombra elegante */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Título */
+.login-container h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+}
+
+/* Formulario */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+/* Labels e Inputs */
+#loginForm label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  display: block;
+}
+
+#loginForm input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+#loginForm input:focus {
+  border-color: var(--primary-color); /* Naranja al enfocar */
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+}
+
+/* Botón Principal */
+#loginForm button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 30px; /* Redondeado estilo píldora */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+#loginForm button[type="submit"]:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
+}
+
+/* Enlaces y Textos Extra */
+.register-label {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 15px;
+  display: block;
+}
+
+.link-btn {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Mensajes de Error */
+.error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
